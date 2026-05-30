@@ -7,6 +7,13 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
-    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+    alias: [
+      {
+        // only match imports starting with "@/" so scoped packages like
+        // "@tailwindcss/..." are not affected
+        find: /^@\/(.*)$/,
+        replacement: path.resolve(__dirname, 'src') + '/$1',
+      },
+    ],
   },
 })
