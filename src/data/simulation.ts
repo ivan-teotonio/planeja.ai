@@ -9,7 +9,7 @@ import {
 
 import type { FormStepProps } from '@/components/features/Simulation/FormStep'
 
-export const simulationFormSteps: FormStepProps[] = [
+export const simulationFormSteps = [
   {
     id: 'income',
     icon: PiggyBank,
@@ -83,4 +83,9 @@ export const simulationFormSteps: FormStepProps[] = [
       emojiIcon: '✨',
     },
   },
-]
+] satisfies FormStepProps[]
+
+export type SimulationFormProps = Record<
+  (typeof simulationFormSteps)[number]['id'], //pega o id de cada passo do formulário e usa como chave
+  string //o valor de cada campo do formulário é uma string
+>

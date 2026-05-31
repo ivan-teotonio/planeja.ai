@@ -1,32 +1,48 @@
-import { simulationFormSteps } from '@/data/simulation'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { type SimulationFormData, simulationFormSteps } from '@/data/simulation'
+import { useSimulationStorage } from '@/hooks/useSimulationStorage'
+
 import { FormStep } from './FormStep'
 import { StepProgress } from './Progress'
 
 export const SimulationForm = () => {
+  const { saveFormData } = useSimulationStorage()
+  const navigate = useNavigate()
+
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
+  const [formData, setFormData] = useState<SimulationFormData>(
+    {} as SimulationFormData,
+  )
   const totalSteps = simulationFormSteps.length
   const currentStep = simulationFormSteps[currentStepIndex]
 
-  //função que avança o formulario
-  const handleNextStep = () => {
-    //se estiver no ultimo passo, não avança mais
+  const handleNextStep = (value: string) => {
+    const updatedFormData = { ...formData, [currentStep.id]: value }
+    setFormData(updatedFormData)
+
+    console.log({ updatedFormData })
+
     if (currentStepIndex + 1 > totalSteps - 1) {
+      const id = saveFormData(updatedFormData)
+      void navigate(`/resultado/${id}`)
       return
     }
+
     setCurrentStepIndex((prev) => prev + 1)
   }
 
-  //voltar um passo no formulario
   const handlePreviousStep = () => {
     if (currentStepIndex === 0) {
       return
     }
+
     setCurrentStepIndex((prev) => prev - 1)
   }
 
   return (
-    <div>
+    <>
       <StepProgress
         currentStep={currentStepIndex + 1}
         totalSteps={totalSteps}
@@ -36,8 +52,8 @@ export const SimulationForm = () => {
         {...currentStep}
         onBack={handlePreviousStep}
         onNext={handleNextStep}
-        hideBackButton={currentStepIndex === 0} //esconde o botão de voltar no primeiro passo
+        hideBackButton={currentStepIndex === 0}
       />
-    </div>
+    </>
   )
 }
