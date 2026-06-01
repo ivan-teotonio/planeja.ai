@@ -1,14 +1,17 @@
-import { useTheme } from '@/hooks/useTheme'
 import { Clock, Moon, Sun, TrendingUp, Wallet } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+
+import { useTheme } from '@/hooks/useTheme'
+
 import { Button } from './Button'
 import { Divider } from './Divider'
+
 export function Header() {
   const navigate = useNavigate()
   const { theme, toggleTheme } = useTheme()
 
   return (
-    <header className="border-(--border) border-b px-6 py-3">
+    <header className="border-b border-(--border) px-6 py-3">
       <nav className="flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2">
@@ -20,7 +23,8 @@ export function Header() {
             <span className="font-extrabold">.ai</span>
           </span>
         </div>
-        {/* Actions buttons */}
+
+        {/* Actions Buttons */}
         <div className="flex items-center gap-1">
           <Button
             variant="secondary"
@@ -36,10 +40,9 @@ export function Header() {
           >
             <span className="hidden sm:inline">Histórico</span>
           </Button>
-          {/* Theme Toggle */}
           <Divider orientation="vertical" />
           <Button
-            area-label={`Mudar para tema ${theme === 'light' ? 'escuro' : 'claro'}`}
+            aria-label={`Mudar para tema ${theme === 'light' ? 'escuro' : 'claro'}`}
             variant="ghost"
             icon={theme === 'light' ? Moon : Sun}
             onClick={toggleTheme}

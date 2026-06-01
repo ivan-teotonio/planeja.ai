@@ -15,7 +15,7 @@ export function Divider({
       : { marginLeft: spacing, marginRight: spacing }
 
   const classNamesByOrientation = {
-    horizontal: 'w-ful h-px',
+    horizontal: 'w-full h-px',
     vertical: 'self-stretch w-px',
   }
 
