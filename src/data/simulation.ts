@@ -7,7 +7,9 @@ import {
   Wallet,
 } from 'lucide-react'
 
-import type { FormStepProps } from '@/components/features/Simulation/FormStep'
+import type { InsightData } from '@/services/aiService'
+
+import type { FormStepProps } from '../components/features/Simulation/FormStep'
 
 export const simulationFormSteps = [
   {
@@ -17,7 +19,7 @@ export const simulationFormSteps = [
     question:
       'Quanto é depositado na sua conta todo mês (somando todas as fontes)?',
     inputProps: {
-      placeholder: 'Ex: R$ 5.000,00',
+      placeholder: 'ex: 5.000,00',
       prefix: 'R$',
       maxLength: 12,
     },
@@ -25,11 +27,11 @@ export const simulationFormSteps = [
   {
     id: 'expenses',
     icon: CreditCard,
-    title: 'Custo fixo de vida',
+    title: 'Custos fixos de vida',
     question:
-      'Quanto você gasta por mês com moradia, alimentação, transporte, etc?',
+      'Quanto você gasta mensalmente com custos fixos (aluguel, contas, etc)?',
     inputProps: {
-      placeholder: 'Ex: R$ 3.000,00',
+      placeholder: 'ex: 2.000,00',
       prefix: 'R$',
       maxLength: 12,
     },
@@ -41,7 +43,7 @@ export const simulationFormSteps = [
     question:
       'Você tem algum valor comprometido com parcelas ou empréstimos mensalmente?',
     inputProps: {
-      placeholder: 'Ex: R$ 1.000,00',
+      placeholder: 'ex: 500,00',
       prefix: 'R$',
       maxLength: 12,
     },
@@ -52,7 +54,7 @@ export const simulationFormSteps = [
     title: 'Nome da meta',
     question: 'Qual o objetivo que você deseja alcançar?',
     inputProps: {
-      placeholder: 'Ex: Viagem para Europa',
+      placeholder: 'ex: Viagem para o Japão',
       maxLength: 50,
     },
   },
@@ -60,9 +62,9 @@ export const simulationFormSteps = [
     id: 'goalAmount',
     icon: Wallet,
     title: 'Custo da meta',
-    question: 'Quanto dinheiro você precisa para alcançar essa meta?',
+    question: 'Quanto custa realizar esse sonho?',
     inputProps: {
-      placeholder: 'Ex: R$ 20.000,00',
+      placeholder: 'ex: 15.000,00',
       prefix: 'R$',
       maxLength: 12,
     },
@@ -73,7 +75,8 @@ export const simulationFormSteps = [
     title: 'Prazo desejado',
     question: 'Em quantos meses você planeja atingir esse objetivo?',
     inputProps: {
-      placeholder: 'Ex: 24 meses',
+      type: 'number',
+      placeholder: 'ex: 12',
       suffix: 'meses',
       min: 1,
       max: 120,
@@ -85,7 +88,12 @@ export const simulationFormSteps = [
   },
 ] satisfies FormStepProps[]
 
-export type SimulationFormProps = Record<
-  (typeof simulationFormSteps)[number]['id'], //pega o id de cada passo do formulário e usa como chave
-  string //o valor de cada campo do formulário é uma string
+export type SimulationFormData = Record<
+  (typeof simulationFormSteps)[number]['id'],
+  string
 >
+
+export type SimulationRecord = SimulationFormData & {
+  id: string
+  insight?: InsightData
+}

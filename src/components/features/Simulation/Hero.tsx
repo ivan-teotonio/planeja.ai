@@ -1,7 +1,6 @@
-//todos os components relacionados ao formulário de simulação, como o header, o formulário em si, etc, vão ficar aqui
 import PiggyBankImage from '@/assets/images/piggy-bank.png'
 
-export function SimulationFormHero() {
+export function SimulationHero() {
   return (
     <div className="mb-8 text-center">
       <div className="flex flex-col items-center sm:flex-row">
@@ -12,12 +11,11 @@ export function SimulationFormHero() {
           src={PiggyBankImage}
           alt=""
           aria-hidden="true"
-          className="h-16 w-16 sm:-ml-3 sm:-mt-2"
+          className="h-16 w-16 sm:-mt-2 sm:-ml-3"
         />
       </div>
       <p className="text-muted-foreground text-sm">
-        Responda algumas perguntas para criarmos um plano financeiro
-        personalizado
+        Responda algumas questões para ter insights financeiros personalizados.
       </p>
     </div>
   )

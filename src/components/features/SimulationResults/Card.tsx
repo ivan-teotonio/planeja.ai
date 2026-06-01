@@ -43,7 +43,7 @@ export function Card({
         <Icon size={16} className={styles.accent} />
         <span
           className={[
-            'text-xs font-semibold uppercase tracking-widest',
+            'text-xs font-semibold tracking-widest uppercase',
             styles.accent,
           ].join(' ')}
         >
